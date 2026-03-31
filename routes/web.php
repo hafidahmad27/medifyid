@@ -31,3 +31,17 @@ Route::get('/master-items/delete/{id}', [App\Http\Controllers\MasterItemsControl
 
 
 Route::get('/master-items/update-random-data', [App\Http\Controllers\MasterItemsController::class, 'updateRandomData']);
+Route::get('/master-items/export/excel', [App\Http\Controllers\MasterItemsController::class, 'exportExcel'])
+    ->name('master-items.export.excel');
+
+Route::prefix('kategori-items')->group(function () {
+    Route::get('/', [App\Http\Controllers\KategoriItemController::class, 'index']);
+    Route::get('/search', [App\Http\Controllers\KategoriItemController::class, 'search']);
+    Route::get('/form/{method}/{id?}', [App\Http\Controllers\KategoriItemController::class, 'formView']);
+    Route::post('/form/{method}/{id?}', [App\Http\Controllers\KategoriItemController::class, 'formSubmit']);
+    Route::get('/view/{kode}', [App\Http\Controllers\KategoriItemController::class, 'singleView']);
+    Route::get('/delete/{id}', [App\Http\Controllers\KategoriItemController::class, 'delete']);
+    Route::get('/update-random-data', [App\Http\Controllers\KategoriItemController::class, 'updateRandomData']);
+
+    Route::get('/{id}/print', [App\Http\Controllers\KategoriItemController::class, 'print'])->name('kategori-items.print');
+});
